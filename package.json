@@ -1,0 +1,30 @@
+{
+  "name": "bot-discord",
+  "version": "1.0.0",
+  "description": "Un bot discord fais differement",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0Mrbilal0/Bot-discord.git"
+  },
+  "author": "Mrbilal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0Mrbilal0/Bot-discord/issues"
+  },
+  "homepage": "https://github.com/0Mrbilal0/Bot-discord#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "mariadb": "^3.0.2",
+    "sequelize": "^6.25.3",
+    "sqlite3": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
