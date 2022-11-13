@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js')
+const { QueryTypes } = require('sequelize')
+const { sequelize } = require('../models/index')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,5 +12,8 @@ module.exports = {
                             .setRequired(true)),
     async execute(interaction) {
         await interaction.reply('en developpement');
+        const description = interaction.options.getString('description');
+        const pseudo = interaction.guild.getNickname;
+        await sequelize.query(`INSERT INTO descriptionrps (description, pseudo) VALUES ('${description}','${pseudo}')`)
     }
 }

@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+require('dotenv').config
+const mariadb= require('mariadb')
+const dbuser = process.env.dbuser
+const dbpassword = process.env.dbpassword
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,16 +15,6 @@ module.exports = {
                 .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
     async execute(interaction) {
-        await interaction.reply('sur la console');
-        const member = interaction.options.data[0].user.id;
-        console.log(interaction.guild.members.fetch().then(console.log).catch(console.error));
-        // switch (member) {
-        //     case value:
-                
-        //         break;
-        
-        //     default:
-        //         break;
-        // }
+        interaction.reply('rien');
     }
 }

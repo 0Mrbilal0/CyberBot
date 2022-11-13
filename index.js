@@ -10,23 +10,18 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 //recuperation du token
 const token = process.env.token;
 
-const mariadb= require('mariadb');
+//Connection a la base de donnée
 const dbuser = process.env.dbuser;
 const dbpassword = process.env.dbpassword;
+const dbname = process.env.dbname;
 
-mariadb.createConnection({
-		host: '127.0.0.1',
-		// ssl: {
-		// 	rejectUnauthorized: false
-		//   }, 
-		user: dbuser,
-		password: dbpassword,
-		port: '3306',
-	}).then(conn => {
-		conn.ping().then(() => {
-			console.log("Database ready ! " + conn.ping.prototype)
-		})
-	})
+//-- Test de la connection --
+// try {
+// 	sequelize.authenticate();
+// 	console.log('Connection has been established successfully.');
+//   } catch (error) {
+// 	console.error('Unable to connect to the database:', error);
+//   }
 
 // Ajout de la getions de fichiers
 client.commands = new Collection();
