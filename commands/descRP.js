@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { QueryTypes } = require('sequelize')
 const { sequelize } = require('../models/index')
+const { QueryTypes } = require('sequelize')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,10 +10,17 @@ module.exports = {
                     option.setName('description')
                             .setDescription('Met ta description RP ici')
                             .setRequired(true)),
+
     async execute(interaction) {
-        await interaction.reply('en developpement');
         const description = interaction.options.getString('description');
-        const pseudo = interaction.guild.getNickname;
-        await sequelize.query(`INSERT INTO descriptionrps (description, pseudo) VALUES ('${description}','${pseudo}')`)
+        const pseudo = interaction.member.displayName;
+        const date = `NOW()`;
+        await sequelize.query(`INSERT INTO descriptionrps (description, pseudo, createdAt) VALUES ("${description}", "${pseudo}", ${date})`, {type: QueryTypes.INSERT}).then((res) => {
+            console.log(res);
+            interaction.reply('La description de ton personnage a bien ete faite et enregistrée !')
+        }).catch((err) => {
+            interaction.reply('Le caractère " n\'est pas autorisé.')
+            console.log('erreur: ' + err.name);
+        });
     }
 }

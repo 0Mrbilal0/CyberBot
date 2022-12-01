@@ -5,15 +5,15 @@ require('dotenv').config();
 require('./deploy-commands.js');
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 //recuperation du token
 const token = process.env.token;
 
 //Connection a la base de donnée
-const dbuser = process.env.dbuser;
-const dbpassword = process.env.dbpassword;
-const dbname = process.env.dbname;
+// const dbuser = process.env.dbuser;
+// const dbpassword = process.env.dbpassword;
+// const dbname = process.env.dbname;
 
 //-- Test de la connection --
 // try {
@@ -39,6 +39,7 @@ for (const file of commandFiles) {
 		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
+
 
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));

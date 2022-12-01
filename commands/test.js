@@ -1,20 +1,15 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
-require('dotenv').config
-const mariadb= require('mariadb')
-const dbuser = process.env.dbuser
-const dbpassword = process.env.dbpassword
+const { EmbedBuilder } = require('discord.js');
+const { QueryTypes } = require('sequelize')
+const { sequelize } = require('../models/index');
+const { execute } = require('./listdesc');
 
 module.exports = {
     data: new SlashCommandBuilder()
                 .setName('test')
-                .setDescription('Commande test fonctions')
-                .addMentionableOption(option => 
-                    option.setName('personne')
-                            .setDescription('Une personne mentionner.')
-                            .setRequired(true))
-                .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+                .setDescription('Commande test fonctions'),
 
     async execute(interaction) {
-        interaction.reply('rien');
+        execute(interaction)
     }
 }

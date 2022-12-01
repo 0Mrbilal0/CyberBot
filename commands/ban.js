@@ -16,19 +16,15 @@ module.exports = {
     async execute(interaction) {
         if (interaction.member.permissions.has("KICK_MEMBERS")) {
             const target = interaction.options.getUser('pseudo');
-            const addreason = interaction.options.getString('addreason');
+            const raison = interaction.options.getString('addreason');
             const member = interaction.user.id;
 
-            interaction.guild.members.kick(target).then(() => {
+            interaction.guild.members.ban(target).then(() => {
             interaction.reply(`@${target.username} s'est fais kick. Il reviendra plus sage nous l'esperont`);
-            interaction.guild.channels.cache.get('1036996167952773190').send(`@${target.username} s'est fais ban par <@${member}> pour la raison suivante: "${addreason}"`)
+            interaction.guild.channels.cache.get('1036996167952773190').send(`@${target.username} s'est fais ban par <@${member}> pour la raison suivante: "${raison}"`)
             }).catch((err) => {
-                if (target == member) {
-                    interaction.reply(err.message + ' : Tu ne peux pas te kick toi-même')
-                }
-                else {
-                    interaction.reply(err.message + ' : Tu ne peux kick que les rang en dessous de toi')
-                }
+                interaction.reply('Il y\'as une erreur')
+                console.log(err);
             });
         }
     }

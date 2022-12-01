@@ -14,20 +14,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkInsert('descriptionrps', [{
-      description: 'Une description aleatoire on s\'en fou',
-      pseudo: 'nom1',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      description: 'la deuxieme description',
-      pseudo: 'nom2',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-  ], {});
-  },
+
+    for (let i = 0; i < 10; i++) {
+        await queryInterface.bulkInsert('descriptionrps', [{
+          description: `Description ${i}`,
+          pseudo: `nom ${i}`,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+      ], {});
+    }
+  }
+     ,
 
   async down (queryInterface, Sequelize) {
     /**

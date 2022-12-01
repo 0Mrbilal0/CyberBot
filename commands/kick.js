@@ -19,7 +19,7 @@ module.exports = {
             const addreason = interaction.options.getString('addreason');
             const member = interaction.user.id;
 
-            console.log(target + ' - ' + member)
+            console.log(member.username + ' kiked ' + target.username)
             interaction.guild.members.kick(target).then(() => {
             interaction.reply(`@${target.username} s'est fais kick. Il reviendra plus sage nous l'esperont`);
             interaction.guild.channels.cache.get('1036996167952773190').send(`@${target.username} s'est fais kick par <@${member}> pour la raison suivante: "${addreason}"`)

@@ -16,7 +16,7 @@ module.exports = {
             async execute(interaction) {
                 const Nom = interaction.options.data[0].value;
                 const Prenom = interaction.options.data[1].value;
-                interaction.member.setNickname(Prenom + " " + Nom).then(() => {
+                interaction.member.setNickname(Nom + " " + Prenom).then(() => {
                     interaction.reply(`Nom : ${Nom}\nPrenom : ${Prenom}`);
                 }).catch((err) => {
                     interaction.reply('Ton rôle est plus élevé que le miens. Fais le toi même !');
