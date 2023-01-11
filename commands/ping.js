@@ -8,5 +8,8 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply('Pong!');
         console.log(`${interaction.user.username} à fait la commande ping !`);
+        setTimeout(() => {
+            interaction.deleteReply()
+        }, 5000);
 },
 }

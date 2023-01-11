@@ -22,6 +22,9 @@ module.exports = {
             console.log(member.username + ' kiked ' + target.username)
             interaction.guild.members.kick(target).then(() => {
             interaction.reply(`@${target.username} s'est fais kick. Il reviendra plus sage nous l'esperont`);
+            setTimeout(() => {
+                interaction.deleteReply()
+            }, 5000);
             interaction.guild.channels.cache.get('1036996167952773190').send(`@${target.username} s'est fais kick par <@${member}> pour la raison suivante: "${addreason}"`)
             }).catch((err) => {
                 // console.log(target + ' - ' + member)

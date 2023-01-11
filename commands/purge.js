@@ -19,7 +19,9 @@ module.exports = {
             } else {
                 interaction.reply(`Vous avez supprimer 50 messages`)
             }
-            
+            setTimeout(() => {
+                interaction.deleteReply()
+            }, 5000);
         }).catch((err) => {
             if (err.code == 50034) {
                 interaction.reply('Vous ne pouvez supprimer en bloc que les messages datant de moins de 14 jours.')

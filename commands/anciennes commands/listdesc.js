@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { QueryTypes } = require('sequelize')
-const { sequelize } = require('../models/index')
+const { sequelize } = require('../../models/index')
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
