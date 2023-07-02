@@ -3,8 +3,8 @@ const path = require('node:path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 require('dotenv').config();
 require('./deploy-commands.js');
-const { sequelize } = require('./models/index')
-const { QueryTypes } = require('sequelize')
+// const { sequelize } = require('./models/index')
+// const { QueryTypes } = require('sequelize')
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
