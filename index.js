@@ -10,7 +10,7 @@ require('./deploy-commands.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 //recuperation du token
-const token = process.env.token;
+const token = process.env.Token;
 
 // Ajout de la getions de fichiers
 client.commands = new Collection();
