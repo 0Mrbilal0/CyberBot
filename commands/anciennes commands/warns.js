@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js')
-const { sequelize } = require('../models/index')
+const { sequelize } = require('../../models/index')
 const { QueryTypes } = require('sequelize')
 
 module.exports = {

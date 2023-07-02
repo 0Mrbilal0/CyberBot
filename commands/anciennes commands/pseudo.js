@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
                 .setName('pseudo')
-                .setDescription('Mets ton nom prenom RP afin d\'acceder au serveur')
+                .setDescription('Mets ton nom prenom RP afin d acceder au serveur')
                 .addStringOption(option =>
                     option.setName('nom')
                         .setDescription('Indique ton Nom RP')

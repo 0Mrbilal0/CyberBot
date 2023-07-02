@@ -29,15 +29,14 @@ for (const file of commandFiles) {
 	} else {
 		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
-	
 }
 
 async function setCommandDB(name, description) {
-	await sequelize.query(`INSERT INTO commands (name,description,createdAt) VALUES ('${name}','${description}', NOW())`, { type: QueryTypes.INSERT }).then((res) => {
+	await sequelize.query(`INSERT INTO commands (name,description,createdAt,updatedAt) VALUES ('${name}','${description}', NOW(), NOW())`, { type: QueryTypes.INSERT }).then((res) => {
 		console.log(res);
 	}).catch((err) => {
 		if (err.name != 'SequelizeUniqueConstraintError') {
-			console.log(err.name);
+			console.log(err);
 		}
 	})
 }

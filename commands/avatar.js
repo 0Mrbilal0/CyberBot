@@ -8,6 +8,7 @@ module.exports = {
                     option.setName('pseudo')
                             .setDescription('Pseudo de la personne')
                             .setRequired(false)),
+                            
     async execute(interaction) {
         /* recuperation de l'utilisateur qui fait la command et de celui ciblé */
         const user = interaction.user;
@@ -19,7 +20,6 @@ module.exports = {
         } else {
             await interaction.reply(user.avatarURL());
         }
-        
         console.log(`${interaction.user.username} à fait la commande avatar !`);
     },
 }
