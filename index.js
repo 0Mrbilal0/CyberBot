@@ -24,22 +24,23 @@ for (const file of commandFiles) {
 	// Set a new item in the Collection with the key as the command name and the value as the exported module
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
-		setCommandDB(command.data.name, command.data.description)
+		// setCommandDB(command.data.name, command.data.description)
 		// console.log(command.data.name + ' + ' + command.data.description);
 	} else {
 		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
 
-async function setCommandDB(name, description) {
-	await sequelize.query(`INSERT INTO commands (name,description,createdAt,updatedAt) VALUES ('${name}','${description}', NOW(), NOW())`, { type: QueryTypes.INSERT }).then((res) => {
-		console.log(res);
-	}).catch((err) => {
-		if (err.name != 'SequelizeUniqueConstraintError') {
-			console.log(err);
-		}
-	})
-}
+// base de donnée 
+// async function setCommandDB(name, description) {
+// 	await sequelize.query(`INSERT INTO commands (name,description,createdAt,updatedAt) VALUES ('${name}','${description}', NOW(), NOW())`, { type: QueryTypes.INSERT }).then((res) => {
+// 		console.log(res);
+// 	}).catch((err) => {
+// 		if (err.name != 'SequelizeUniqueConstraintError') {
+// 			console.log(err);
+// 		}
+// 	})
+// }
 
 /** Importer les commands du dossier musics qui etait crée. **/ 
 // const musicsPath = path.join(__dirname, 'commands/musics');
