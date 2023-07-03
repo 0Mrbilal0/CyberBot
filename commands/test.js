@@ -109,9 +109,9 @@ module.exports = {
             .setColor('Aqua')
             .setTitle('Ceci est un titre')
             .setURL('https://google.com/')
-            .setAuthor({name:'Author', iconURL:'https://i.imgur.com/AfFp7pu.png', url:'https://google.com/'})
+            .setAuthor({name:''})
             .setDescription('Ceci est une description')
-            // .setFooter('Un footer')
+            .setFooter({text:'Un footer'})
         const reponse = await interaction.reply({
             embeds:[embed],
             components: [row],
@@ -137,7 +137,5 @@ module.exports = {
         }
         
         // .send("Test")
-
-
         }
 }

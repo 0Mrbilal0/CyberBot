@@ -8,21 +8,10 @@ module.exports = {
                     option
                         .setName('question')
                         .setDescription('Envoyez un questionnaire.')
-                        // .addMentionableOption(option =>
-                        //     option
-                        //         .setName('author')
-                        //         .setDescription('')
-                        //     )
                         .addBooleanOption(option =>
                             option
                                 .setName('private')
                                 .setDescription('Choisis si c\'est un test ou un envoie')
-                                .setRequired(true)
-                        )
-                        .addBooleanOption(option =>
-                            option
-                                .setName('author')
-                                .setDescription('Ajout d\'un auteur.')
                                 .setRequired(true)
                         )
                         .addChannelOption(option =>
@@ -34,8 +23,9 @@ module.exports = {
                 ),
                     
     async execute(interaction) {
-        const state = interaction.options.getBoolean('private')
-        console.log(state);
+        const statePrivate = interaction.options.getBoolean('private')
+        const resChannel = interaction.options.getBoolean('channel')
+        // console.log(state);
         const form = new ModalBuilder()
             .setCustomId('formulaire')
             .setTitle('Choisis tes questions.')
@@ -44,8 +34,9 @@ module.exports = {
         const couleurInput = new TextInputBuilder()
             .setCustomId('couleur')
             .setLabel('Quel est ta couleur ?')
-            .setPlaceholder('Indiquez une couleur en hexadecimal.')
+            .setPlaceholder('Indiquez une couleur en hexadecimal. Default = Blurple')
             .setStyle(TextInputStyle.Short)
+            .setRequired(false)
         const couleurActionRow = new ActionRowBuilder().addComponents(couleurInput)
         form.addComponents(couleurActionRow)
         
@@ -55,6 +46,7 @@ module.exports = {
             .setLabel('Qui est l\'auteur du message')
             .setPlaceholder('Ecrivez qui est l\'auteur du message')
             .setStyle(TextInputStyle.Short)
+            .setRequired(false)
         const auteurActionRow = new ActionRowBuilder().addComponents(auteurInput)
         form.addComponents(auteurActionRow)
         
@@ -62,7 +54,7 @@ module.exports = {
         const titreInput = new TextInputBuilder()
             .setCustomId('titre')
             .setLabel('Quel va être le titre ?')
-            .setPlaceholder('Ecris ta premiere question.')
+            .setPlaceholder('Ecrivez le titre du message.')
             .setStyle(TextInputStyle.Short)
         const titreActionRow = new ActionRowBuilder().addComponents(titreInput);
         form.addComponents(titreActionRow)
@@ -76,30 +68,43 @@ module.exports = {
         const contenuActionRow = new ActionRowBuilder().addComponents(contenuInput);
         form.addComponents(contenuActionRow)
 
+        // Footer
+        const footerInput = new TextInputBuilder()
+            .setCustomId('footer')
+            .setLabel('Quel va être le footer ?')
+            .setPlaceholder('C\'est ce qui va etre mis en bas du message en footer.')
+            .setStyle(TextInputStyle.Short)
+            .setRequired(false)
+        const footerActionRow = new ActionRowBuilder().addComponents(footerInput);
+        form.addComponents(footerActionRow)
+
         await interaction.showModal(form);
         
         const filter = (interaction) => interaction.customId === 'formulaire';
-            interaction.awaitModalSubmit({ filter, time: 15_000 })
+            interaction.awaitModalSubmit({ filter, time: 480_000 })
             .then(interaction => {
-                const resAuthor = interaction.fields.getTextInputValue('auteur')
-                const resTitle = interaction.fields.getTextInputValue('titre');
-                const rescontenu = interaction.fields.getTextInputValue('contenu');
-                const resColor = interaction.fields.getTextInputValue('')
+                const resColor = interaction.fields.getTextInputValue('couleur')
+                const resAuthor = interaction.fields.getTextInputValue('auteur');
+                const resTitle = interaction.fields.getTextInputValue('titre')
+                const rescontenu = interaction.fields.getTextInputValue('contenu')
+                const resFooter = interaction.fields.getTextInputValue('footer')
 
                 const embed = new EmbedBuilder()
-                    ?.setTitle(resTitle)
+                    .setColor(resColor || 'Blurple')
+                    .setAuthor({name:resAuthor || null})
+                    .setTitle(resTitle)
                     .setDescription(rescontenu)
-                    .setAuthor(resAuthor)
-                    .setColor(resColor)
+                    .setFooter({text:resFooter || null})
                     
+                const response = interaction.guild.channels.cache.get(resChannel).send({
+                    embeds: [embed],
+                    ephemeral:statePrivate
+                })
+                // const response =  interaction.reply({embeds:[embed], ephemeral:statePrivate})
 
-                interaction.guild.channels.cache.get('725318402373058611').send({
-                        embeds: [embed]
-
-                    })
             }).catch(err => {
-                interaction.reply('error')
                 console.error(err)
             });
+            
     }
 }

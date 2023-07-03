@@ -42,21 +42,6 @@ for (const file of commandFiles) {
 // 	})
 // }
 
-/** Importer les commands du dossier musics qui etait crée. **/ 
-// const musicsPath = path.join(__dirname, 'commands/musics');
-// const musicsFiles = fs.readdirSync(musicsPath).filter(file => file.endsWith('.js'));
-
-// for (const musicfile of musicsFiles) {
-// 	const musicFilePath = path.join(musicsPath, musicfile);
-// 	const music = require(musicFilePath);
-// 	// Set a new item in the Collection with the key as the command name and the value as the exported module
-// 	if ('data' in music && 'execute' in music) {
-// 		client.commands.set(music.data.name, music);
-// 	} else {
-// 		console.log(`[WARNING] The command at ${musicsFilePath} is missing a required "data" or "execute" property.`);
-// 	}
-// }
-
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 

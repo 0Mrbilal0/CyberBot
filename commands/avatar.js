@@ -15,11 +15,17 @@ module.exports = {
         const target = interaction.options.getUser('pseudo');
         console.log(target + " - " + user)
         /* afficher l'avatar de la source ou de celui ciblé */
-        if (target !== null) {
-            await interaction.reply(target.avatarURL());
-        } else {
-            await interaction.reply(user.avatarURL());
+        try {
+            if (target !== null) {
+                await interaction.reply(target.avatarURL()+"?size=4096");
+            } else {
+                await interaction.reply(user.avatarURL()+"?size=4096");
+            }
+            const message = await interaction.fetchReply()
+            message.react('❤️')
+            console.log(`${interaction.user.username} à fait la commande avatar !`);
+        } catch (error) {
+            console.error(error);
         }
-        console.log(`${interaction.user.username} à fait la commande avatar !`);
     },
 }
