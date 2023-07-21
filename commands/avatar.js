@@ -2,30 +2,39 @@ const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
-                .setName('avatar')
-                .setDescription('Afficher ta photo de profil')
-                .addUserOption(option =>
-                    option.setName('pseudo')
-                            .setDescription('Pseudo de la personne')
-                            .setRequired(false)),
-                            
-    async execute(interaction) {
+        .setName('avatar')
+        .setDescription('Afficher un avatar')
+        .addUserOption(option =>
+                option
+                    .setName('user')
+                    .setDescription('Precise un utilisateur pour voir son avatar')
+                    .setRequired(false)
+        ),
+    
+    async execute(interaction){
         /* recuperation de l'utilisateur qui fait la command et de celui ciblé */
         const user = interaction.user;
         const target = interaction.options.getUser('pseudo');
-        console.log(target + " - " + user)
+        const statePrivate = interaction.options.getBoolean('private')
+
         /* afficher l'avatar de la source ou de celui ciblé */
         try {
             if (target !== null) {
-                await interaction.reply(target.avatarURL()+"?size=4096");
+                await interaction.reply({
+                    content:target.avatarURL()+"?size=4096",
+                    ephemeral:statePrivate
+                });
             } else {
-                await interaction.reply(user.avatarURL()+"?size=4096");
+                await interaction.reply({
+                    content:user.avatarURL()+"?size=4096",
+                    ephemeral:statePrivate
+                });
             }
+
             const message = await interaction.fetchReply()
             message.react('❤️')
-            console.log(`${interaction.user.username} à fait la commande avatar !`);
         } catch (error) {
             console.error(error);
         }
-    },
+    }
 }
