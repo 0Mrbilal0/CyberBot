@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
+const PostModel = require('../../models/post.model')
 
 module.exports = {
     // Builder qui va generer les information de la commande

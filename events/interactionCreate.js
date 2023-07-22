@@ -1,4 +1,4 @@
-const { Events } = require('discord.js');
+const { Events } = require('discord.js')
 
 module.exports = {
 	name: Events.InteractionCreate,
@@ -8,7 +8,7 @@ module.exports = {
 
 		if (!command) {
 			console.error(`No command matching ${interaction.commandName} was found.`)
-			return;
+			return
 		}
 
 		try {
@@ -16,7 +16,7 @@ module.exports = {
 			console.log(`La commande ${command['data'].name} a été faite par ${interaction.user.username}`)
 		} catch (error) {
 			console.error(`Error executing ${interaction.commandName}`)
-			console.error(error);
+			console.error(error)
 		}
 	},
-}
+};

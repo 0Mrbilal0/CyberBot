@@ -1,0 +1,22 @@
+const { Events } = require('discord.js')
+
+module.exports = {
+    name: Events.PresenceUpdate,
+    async execute(oldPresence, newPresence){
+        if (!oldPresence) {
+            const activities = newPresence.activities.map(activity => activity.name).join(', ')
+            const status = newPresence.status
+      
+            console.log(`Presence update detected for user ${newPresence.user.tag}`)
+            console.log(`New Presence: Status: ${status}, Activities: ${activities}`)
+      
+          } else {
+            const oldActivities = oldPresence.activities.map(activity => activity.name).join(', ')
+            const newActivities = newPresence.activities.map(activity => activity.name).join(', ')
+      
+            console.log(`Presence update detected for user ${newPresence.user.tag}`)
+            console.log(`Old Presence: Status: ${oldPresence.status}, Activities: ${oldActivities}`)
+            console.log(`New Presence: Status: ${newPresence.status}, Activities: ${newActivities}`)
+          }
+    }
+};

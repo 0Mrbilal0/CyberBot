@@ -12,29 +12,28 @@ module.exports = {
         ),
     
     async execute(interaction){
-        /* recuperation de l'utilisateur qui fait la command et de celui ciblé */
-        const user = interaction.user;
-        const target = interaction.options.getUser('pseudo');
+        /** Récuperation de l'utilisateur qui fait la command et de celui ciblé */
+        const user = interaction.user
+        const target = interaction.options.getUser('pseudo')
         const statePrivate = interaction.options.getBoolean('private')
 
-        /* afficher l'avatar de la source ou de celui ciblé */
+        /** Afficher l'avatar de la source ou de celui ciblé */
         try {
             if (target !== null) {
                 await interaction.reply({
                     content:target.avatarURL()+"?size=4096",
                     ephemeral:statePrivate
-                });
+                })
             } else {
                 await interaction.reply({
                     content:user.avatarURL()+"?size=4096",
                     ephemeral:statePrivate
-                });
+                })
             }
-
             const message = await interaction.fetchReply()
             message.react('❤️')
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
 }
