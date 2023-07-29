@@ -13,4 +13,18 @@ const postSchema = mongoose.Schema(
     }
 )
 
+const postConfig = mongoose.Schema(
+    {
+        salonFortnite: {
+            type: String,
+            required: false
+        },
+        salonlogs: {
+            type: String,
+            required: false
+        }
+    }
+)
+
+module.exports = mongoose.model('salonfortnite', postConfig)
 module.exports = mongoose.model('message', postSchema)
