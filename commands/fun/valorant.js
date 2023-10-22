@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+// const { default: axios } = require("axios");
 const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
         const dataMap = await axios.get('https://valorant-api.com/v1/maps')
         const dataSelect = dataMap.data.data
         const dropDown = []
-
+        
         dataSelect.forEach(element => {
             dropDown.push(
                 new StringSelectMenuOptionBuilder()

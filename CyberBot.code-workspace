@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.tokenColorCustomizations": { 
+			"comments": "#fff",
+			"functions": "#90EE90",
+			"variables": "#ADD8E6",
+			"keywords": "#8800ff"
+		},
+	}
+}

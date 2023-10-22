@@ -25,7 +25,7 @@ module.exports = {
                 content: target.bannerURL()+"?size=4096",
                 ephemeral: statePrivate
             })
-            // console.log('Voici l\'url de la banniere de la cible: ' + target.bannerURL())
+        // console.log('Voici l\'url de la banniere de la cible: ' + target.bannerURL())
         } else {
             await interaction.reply({
                 content: 'Il n\'y a pas de banniere a afficher !',

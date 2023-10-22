@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 require('dotenv').config();
 
-const token = process.env.token;
+const token = process.env.Token;
 const clientId = process.env.client_id;
 const commands = [];
 
