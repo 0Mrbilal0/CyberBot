@@ -1,4 +1,4 @@
-// const { default: axios } = require("axios");
+const { default: axios } = require("axios");
 const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports = {
