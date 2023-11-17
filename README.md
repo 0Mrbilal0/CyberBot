@@ -4,9 +4,13 @@
 
 ### Commandes pour lancer le bot temporairement :
 
+----------
+
 `npm start` : lance le bot basiquement `CTRL+C` pour arreter
 
 `npm run watch` : lance le bot en regardant les modifications
+
+----------
 
 ### Commande pour crée un processus :
 
