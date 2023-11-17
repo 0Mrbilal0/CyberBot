@@ -103,6 +103,4 @@ dist
 # TernJS port file
 .tern-port
 
-# fichier utile qu'a moi
-base de donnée.js
-code_different.js
+*.local
