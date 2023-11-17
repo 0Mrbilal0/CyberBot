@@ -18,7 +18,7 @@ module.exports = {
 			console.error(`Error executing ${interaction.commandName}`)
 			console.error(error)
 
-			mrbilal.send(`Error executing command '${interaction.commandName}': \`\`\`${err}\`\`\``)
+			mrbilal.send(`Error executing command '${interaction.commandName}': \`\`\`${error}\`\`\``)
             interaction.reply({
                 content: 'Il y\'a une erreur, un message a ete envoyé au developpeur avec l\'erreur',
                 ephemeral: true
