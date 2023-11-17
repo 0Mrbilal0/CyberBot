@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { default: OpenAI } = require("openai");
 require("dotenv").config;
 
@@ -7,6 +7,27 @@ const tokenAI = process.env.OPENAI_KEY;
 const openai = new OpenAI({
   apiKey: tokenAI,
 });
+
+async function getResonse(question, subject) {
+  try {
+    const result = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        subject
+          ? {
+              role: "system",
+              content: `donne seulement des reponse en rapport avec ${subject}`,
+            }
+          : { role: "system", content: "aucun parametre donné" },
+        { role: "user", content: question },
+      ],
+    });
+    const response = result.choices[0].message.content;
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,25 +51,20 @@ module.exports = {
   async execute(interaction) {
     const question = interaction.options.getString("question");
     const subject = interaction.options.getString("sujet");
+    const user = interaction.user;
+    await interaction.reply({ content: `Salut ${user}, laisse moi réflechir à ta question...` });
+    
+    const response = await getResonse(question, subject);
+    console.log(response);
 
-    try {
-    //   const result = await openai.chat.completions.create({
-    //     model: "gpt-3.5-turbo",
-    //     messages: [
-    //       //   subject ? { role: "system", content: subject } : null,
-    //       { role: "user", content: question },
-    //     ],
-    //   });
+    const embed = new EmbedBuilder()
+      .setTitle('__Question: '+question+'__')
+      .setDescription('Réponse: '+response)
+      .setColor("Blue");
 
-      const response = result.choices[0].message.content;
-      console.log(response);
-      await interaction.reply({
-        content: 'une reponse',
-        ephemeral: false,
-      });
-    } catch (error) {
-      console.error(error);
-      interaction.reply('une erreur s\'est produite');
-    }
+    interaction.editReply({
+      content:'Merci de votre patience.\nVoici ma reponse: ',
+      embeds: [embed],
+    });
   },
 };
