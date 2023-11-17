@@ -14,7 +14,7 @@
 			"module.exports = {"
 			"	data: new SlashCommandBuilder()"
 			"		.setName('$1')"
-			"		.setDescription('$2')"
+			"		.setDescription('$2'),"
 			""
 			"	async execute(interaction) {"
 			""
