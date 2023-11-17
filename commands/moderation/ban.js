@@ -8,7 +8,7 @@ module.exports = {
             option
                 .setName('user')
                 .setDescription('Indiquez l\'utilsateur que vous voulez ban'))
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
     
     async execute(interaction) {
         
