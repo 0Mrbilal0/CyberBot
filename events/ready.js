@@ -1,7 +1,7 @@
 const { Events, ActivityType } = require('discord.js')
 require('dotenv').config()
 
-const connectDB = require('../config/db')
+const connectDB = require('../config/db');
 const uri = process.env.uri
 
 module.exports = {
