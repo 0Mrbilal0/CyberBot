@@ -1,3 +1,4 @@
+// Reinitiallisé le temps a chaque fois qu'un choix est fait dans le dropbox
 const { default: axios } = require("axios");
 const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
@@ -30,6 +31,7 @@ module.exports = {
                     .setValue(element.displayName)
             )
         })
+        
         const select = new StringSelectMenuBuilder()
             .setCustomId('ChoixDeMap')
             .setPlaceholder('Choisis ta map.')
@@ -108,7 +110,7 @@ module.exports = {
                     let i = 0
                     while (i === 0) {
                         const collectorFilter = i => i.user.id === interaction.user.id && (i.customId === 'ChoixDeMap' || i.customId === 'cancelButton')
-                        const confirmation = await reponsePlan.awaitMessageComponent({ filter: collectorFilter, time: 10000 })
+                        const confirmation = await reponsePlan.awaitMessageComponent({ filter: collectorFilter, time: 60000 })
                     
                         if (confirmation.customId === 'ChoixDeMap') {
                             const choix = confirmation.values

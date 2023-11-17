@@ -6,7 +6,7 @@ module.exports = {
         .setDescription('Afficher un avatar')
         .addUserOption(option =>
                 option
-                    .setName('user')
+                    .setName('pseudo')
                     .setDescription('Precise un utilisateur pour voir son avatar')
                     .setRequired(false)
         ),
