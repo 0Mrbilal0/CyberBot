@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { default: OpenAI } = require("openai");
+const { EmbedsBuilder } = require("../../config/embed");
 require("dotenv").config;
 
 const tokenAI = process.env.OPENAI_KEY;
@@ -8,7 +9,7 @@ const openai = new OpenAI({
   apiKey: tokenAI,
 });
 
-async function getResonse(question, subject) {
+async function getResponse(question, subject) {
   try {
     const result = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -54,17 +55,17 @@ module.exports = {
     const user = interaction.user;
     await interaction.reply({ content: `Salut ${user}, laisse moi réflechir à ta question...` });
     
-    const response = await getResonse(question, subject);
+    const response = await getResponse(question, subject);
     console.log(response);
 
-    const embed = new EmbedBuilder()
-      .setTitle('__Question: '+question+'__')
-      .setDescription('Réponse: '+response)
-      .setColor("Blue");
+    // const embed = new EmbedBuilder()
+    //   .setTitle('__'+question+'__')
+    //   .setDescription(response)
+    //   .setColor("Blue");
 
     interaction.editReply({
       content:'Merci de votre patience.\nVoici ma reponse: ',
-      embeds: [embed],
+      embeds: [EmbedsBuilder('Blue', '__'+question+'__', response )],
     });
   },
 };
