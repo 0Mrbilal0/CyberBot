@@ -1,16 +1,19 @@
-name: remote ssh command
-on: push
-jobs:
+name: DEPLOY
+on:
+  push:
+    branches:
+    - master
 
-  build:
-    name: Build
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v1.0.0
+    - uses: actions/checkout@v3
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@6.0.0
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: whoami
+        switches: -avzr --delete
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_user: ${{ secrets.DEPLOY_USERNAME }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
