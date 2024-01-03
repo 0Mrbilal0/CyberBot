@@ -22,3 +22,13 @@ pm2 sert a la gestion des processus nodeJs
 - `pm2 restart server.js{nom du fichier source}` : permet de relancer le processus
 - `pm2 stop server.js{nom du fichier source}` : permet de stoper le processus
 ----------
+
+### Clefs features :
+
+---
+
+- Permettre d'inviter le bot
+- Permettre de paramétrer le bot
+- Achat de fonctionnalités optionnelles
+
+---
